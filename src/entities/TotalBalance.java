@@ -14,13 +14,19 @@ public class TotalBalance {
     private Set<AccountRecord> passiveLongTerm = new HashSet<>();
     private BigDecimal totalActives = BigDecimal.ZERO;
     private BigDecimal totalPassives = BigDecimal.ZERO;
+    private StatementIncome statementIncome;
 
     public TotalBalance() {
+        this.statementIncome = new StatementIncome();
     }
 
     public void showTotalBalance() {
         showActives();
         showPassives();
+        this.statementIncome.setTotalIncome(this.totalActives);
+        this.statementIncome.setTotalExpenses(this.totalPassives);
+        this.statementIncome.setNetProfit(this.totalActives.subtract(this.totalPassives));
+        System.out.println(this.statementIncome.toString());
     }
 
     public void showActives() {
