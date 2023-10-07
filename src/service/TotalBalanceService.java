@@ -27,7 +27,4 @@ public class TotalBalanceService {
 
         return totalBalance;
     }
-
-
-
 }

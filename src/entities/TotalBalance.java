@@ -1,5 +1,7 @@
 package entities;
 
+import enums.ConceptType;
+
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,143 +12,107 @@ public class TotalBalance {
     private Set<AccountRecord> fixedActive = new HashSet<>();
     private Set<AccountRecord> passiveCurrent = new HashSet<>();
     private Set<AccountRecord> passiveLongTerm = new HashSet<>();
-    private BigDecimal totalActivos;
-    private BigDecimal totalPassivos;
+    private BigDecimal totalActives = BigDecimal.ZERO;
+    private BigDecimal totalPassives = BigDecimal.ZERO;
 
     public TotalBalance() {
     }
 
     public void showTotalBalance() {
+        showActives();
+        showPassives();
+    }
+
+    public void showActives() {
         showActiveCurrent();
         showFixedActive();
+        System.out.printf("TOTAL: $ %.2f%n%n", this.totalActives);
+    }
+
+    public void showPassives() {
         showPassiveCurrent();
         showPassiveLongTerm();
+        System.out.printf("TOTAL: $ %.2f%n%n", this.totalPassives);
     }
 
     private void showPassiveLongTerm() {
-        BigDecimal bonusesAmount = BigDecimal.ZERO;
-        BigDecimal finceLeasesAmount = BigDecimal.ZERO;
-        BigDecimal longTermLoanAmount = BigDecimal.ZERO;
+        BigDecimal bonusesAmount = sumAmountByConceptType(getFixedActive(), ConceptType.BONUSES);
+        BigDecimal finceLeasesAmount = sumAmountByConceptType(getFixedActive(), ConceptType.FINANCE_LEASES);
+        BigDecimal longTermLoanAmount = sumAmountByConceptType(getFixedActive(), ConceptType.LONG_TERM_LOAN);
 
-        var activesCurrent = getFixedActive();
+        System.out.println("PASSIVOS A LARGO PLAZO");
+        printAmount("Bonificaciones $", bonusesAmount);
+        printAmount("Arrendamientos financeiros $", finceLeasesAmount);
+        printAmount("Prestamo a largo plazo $", longTermLoanAmount);
 
-        for (AccountRecord activeRecord : activesCurrent) {
-            switch (activeRecord.getConceptType()){
-                case BONUSES -> bonusesAmount = bonusesAmount.add(activeRecord.getAmount());
-                case FINANCE_LEASES -> finceLeasesAmount = finceLeasesAmount.add(activeRecord.getAmount());
-                case LONG_TERM_LOAN -> longTermLoanAmount = longTermLoanAmount.add(activeRecord.getAmount());
-            }
-        }
-
-        System.out.println("Passivos a largo plazo");
-        if (!bonusesAmount.equals(BigDecimal.ZERO) ) {
-            System.out.printf("Bonificaciones $: %.2f%n", bonusesAmount);
-        }
-        if (!finceLeasesAmount.equals(BigDecimal.ZERO) ) {
-            System.out.printf("Arrendamientos financeiros $: %.2f%n", finceLeasesAmount);
-        }
-        if (!longTermLoanAmount.equals(BigDecimal.ZERO) ) {
-            System.out.printf("Prestamo a largo plazo $: %.2f%n", longTermLoanAmount);
-        }
-
-        BigDecimal totalPassiveCurrent = bonusesAmount.add(finceLeasesAmount.add(longTermLoanAmount));
-
-        System.out.printf("Total passivos a largo plazo $: %.2f%n", totalPassiveCurrent);
+        BigDecimal totalPassiveLongTerm = bonusesAmount.add(finceLeasesAmount).add(longTermLoanAmount);
+        printTotal("Total passivos a largo plazo $", totalPassiveLongTerm);
+        sumAmountPassive(totalPassiveLongTerm);
     }
 
     private void showPassiveCurrent() {
-        BigDecimal taxAmount = BigDecimal.ZERO;
-        BigDecimal billToPayAmount = BigDecimal.ZERO;
-        BigDecimal reserveProvisionAmount = BigDecimal.ZERO;
+        BigDecimal taxAmount = sumAmountByConceptType(getPassiveCurrent(), ConceptType.TAX);
+        BigDecimal billToPayAmount = sumAmountByConceptType(getPassiveCurrent(), ConceptType.BILL_TO_PAY);
+        BigDecimal reserveProvisionAmount = sumAmountByConceptType(getPassiveCurrent(), ConceptType.RESERVE_PROVISION);
 
-        var activesCurrent = getFixedActive();
+        System.out.println("PASSIVOS CURRIENTES");
+        printAmount("Impuesto $", taxAmount);
+        printAmount("Factura para pagar $", billToPayAmount);
+        printAmount("Disposicion de reserva $", reserveProvisionAmount);
 
-        for (AccountRecord activeRecord : activesCurrent) {
-            switch (activeRecord.getConceptType()){
-                case TAX -> taxAmount = taxAmount.add(activeRecord.getAmount());
-                case BILL_TO_PAY -> billToPayAmount = billToPayAmount.add(activeRecord.getAmount());
-                case RESERVE_PROVISION -> reserveProvisionAmount = reserveProvisionAmount.add(activeRecord.getAmount());
-            }
-        }
-
-        System.out.println("Passivos Currientes");
-        if (!taxAmount.equals(BigDecimal.ZERO) ) {
-            System.out.printf("Impuesto $: %.2f%n", taxAmount);
-        }
-        if (!billToPayAmount.equals(BigDecimal.ZERO) ) {
-            System.out.printf("Factura para pagar $: %.2f%n", billToPayAmount);
-        }
-        if (!reserveProvisionAmount.equals(BigDecimal.ZERO) ) {
-            System.out.printf("Disposicion de reserva $: %.2f%n", reserveProvisionAmount);
-        }
-
-        BigDecimal totalPassiveCurrent = taxAmount.add(billToPayAmount.add(reserveProvisionAmount));
-
-        System.out.printf("Total passivos currientes $: %.2f%n", totalPassiveCurrent);
+        BigDecimal totalPassiveCurrent = taxAmount.add(billToPayAmount).add(reserveProvisionAmount);
+        printTotal("Total passivos currientes $", totalPassiveCurrent);
+        sumAmountPassive(totalPassiveCurrent);
     }
 
-
     private void showFixedActive() {
-        BigDecimal propertyAmount = BigDecimal.ZERO;
-        BigDecimal teamAmount = BigDecimal.ZERO;
-        BigDecimal deferredAssetAmount = BigDecimal.ZERO;
+        BigDecimal propertyAmount = sumAmountByConceptType(getFixedActive(), ConceptType.PROPERTY);
+        BigDecimal teamAmount = sumAmountByConceptType(getFixedActive(), ConceptType.TEAM);
+        BigDecimal deferredAssetAmount = sumAmountByConceptType(getFixedActive(), ConceptType.DEFERRED_ASSETS);
 
-        var activesCurrent = getFixedActive();
+        System.out.println("ACTIVOS FIJOS");
+        printAmount("Propiedad $", propertyAmount);
+        printAmount("Equipo $", teamAmount);
+        printAmount("Activos diferidos $", deferredAssetAmount);
 
-        for (AccountRecord activeRecord : activesCurrent) {
-            switch (activeRecord.getConceptType()){
-                case PROPERTY -> propertyAmount = propertyAmount.add(activeRecord.getAmount());
-                case TEAM -> teamAmount = teamAmount.add(activeRecord.getAmount());
-                case DEFERRED_ASSETS -> deferredAssetAmount = deferredAssetAmount.add(activeRecord.getAmount());
-            }
-        }
-
-
-        System.out.println("Activos Fijos");
-        if (!propertyAmount.equals(BigDecimal.ZERO) ) {
-            System.out.printf("Propiedad $: %.2f%n", propertyAmount);
-        }
-        if (!teamAmount.equals(BigDecimal.ZERO) ) {
-            System.out.printf("Equipo $: %.2f%n", teamAmount);
-        }
-        if (!deferredAssetAmount.equals(BigDecimal.ZERO) ) {
-            System.out.printf("Activos diferidos $: %.2f%n", deferredAssetAmount);
-        }
-
-        BigDecimal totalActivosFijos = propertyAmount.add(teamAmount.add(deferredAssetAmount));
-
-        System.out.printf("Total activos fijos $: %.2f%n", totalActivosFijos);
+        BigDecimal totalFixedAssets = propertyAmount.add(teamAmount).add(deferredAssetAmount);
+        printTotal("Total activos fijos $", totalFixedAssets);
+        sumAmountActive(totalFixedAssets);
     }
 
     private void showActiveCurrent() {
-        BigDecimal currentMoney = BigDecimal.ZERO;
-        BigDecimal billToReceive = BigDecimal.ZERO;
-        BigDecimal stock = BigDecimal.ZERO;
+        BigDecimal currentMoney = sumAmountByConceptType(getActiveCurrent(), ConceptType.CURRENT_MONEY);
+        BigDecimal billToReceive = sumAmountByConceptType(getActiveCurrent(), ConceptType.BILL_TO_RECEIVE);
+        BigDecimal stock = sumAmountByConceptType(getActiveCurrent(), ConceptType.EFECTIVO);
 
-        var activesCurrent = getActiveCurrent();
-        
-        for (AccountRecord activeRecord : activesCurrent) {
-            switch (activeRecord.getConceptType()){
-                case CURRENT_MONEY -> currentMoney = currentMoney.add(activeRecord.getAmount());
-                case BILL_TO_RECEIVE -> billToReceive = billToReceive.add(activeRecord.getAmount());
-                case EFECTIVO -> stock = stock.add(activeRecord.getAmount());
+        System.out.println("ACTIVOS CURRIENTES");
+        printAmount("Dinero $", currentMoney);
+        printAmount("Factura $", billToReceive);
+        printAmount("Efectivo $", stock);
+
+        BigDecimal totalActiveCurrent = currentMoney.add(billToReceive).add(stock);
+        printTotal("Total activos currientes $", totalActiveCurrent);
+        sumAmountActive(totalActiveCurrent);
+    }
+
+    private BigDecimal sumAmountByConceptType(Set<AccountRecord> records, ConceptType conceptType) {
+        BigDecimal sum = BigDecimal.ZERO;
+        for (AccountRecord record : records) {
+            if (record.getConceptType().equals(conceptType)) {
+                sum = sum.add(record.getAmount());
             }
         }
+        return sum;
+    }
 
-        System.out.println("Activos Currientes");
-        if (!currentMoney.equals(BigDecimal.ZERO) ) {
-            System.out.printf("Dinero $: %.2f%n", currentMoney);
+    private void printAmount(String label, BigDecimal amount) {
+        if (!amount.equals(BigDecimal.ZERO)) {
+            System.out.printf("%s: %.2f%n", label, amount);
         }
-        if (!billToReceive.equals(BigDecimal.ZERO) ) {
-            System.out.printf("Factura $: %.2f%n", billToReceive);
-        }
-        if (!stock.equals(BigDecimal.ZERO) ) {
-            System.out.printf("Efectivo $: %.2f%n", stock);
-        }
+    }
 
-        BigDecimal totalActiveCurrent = currentMoney.add(billToReceive.add(stock));
-
-        System.out.printf("Total activos currientes $: %.2f%n", totalActiveCurrent);
+    private void printTotal(String label, BigDecimal total) {
+        System.out.printf("%s: %.2f%n", label, total);
     }
 
     public Set<AccountRecord> getActiveCurrent() {
@@ -181,19 +147,26 @@ public class TotalBalance {
         this.passiveLongTerm = passiveLongTerm;
     }
 
-    public BigDecimal getTotalActivos() {
-        return totalActivos;
+    public void sumAmountActive(BigDecimal amount) {
+        this.totalActives = this.totalActives.add(amount);
+    }
+    public void sumAmountPassive(BigDecimal amount) {
+        this.totalPassives = this.totalPassives.add(amount);
     }
 
-    public void setTotalActivos(BigDecimal totalActivos) {
-        this.totalActivos = totalActivos;
+    public BigDecimal getTotalActives() {
+        return totalActives;
     }
 
-    public BigDecimal getTotalPassivos() {
-        return totalPassivos;
+    public void setTotalActives(BigDecimal totalActives) {
+        this.totalActives = totalActives;
     }
 
-    public void setTotalPassivos(BigDecimal totalPassivos) {
-        this.totalPassivos = totalPassivos;
+    public BigDecimal getTotalPassives() {
+        return totalPassives;
+    }
+
+    public void setTotalPassives(BigDecimal totalPassives) {
+        this.totalPassives = totalPassives;
     }
 }
