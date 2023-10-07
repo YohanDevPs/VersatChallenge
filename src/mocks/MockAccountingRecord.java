@@ -1,7 +1,7 @@
 package mocks;
 
 import enums.ConceptType;
-import entities.Transaction;
+import entities.AccountRecord;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -19,12 +19,12 @@ public class MockAccountingRecord {
         return new Random().nextDouble(max - min);
     }
 
-    public static List<Transaction> accountRecordList() {
-        List<Transaction> transactions = new ArrayList<>();
+    public static List<AccountRecord> accountRecordList() {
+        List<AccountRecord> accountRecords = new ArrayList<>();
 
         for (int i = 0; i < 20; i++) {
-            transactions.add(
-                    new Transaction(LocalDateTime.of(
+            accountRecords.add(
+                    new AccountRecord(LocalDateTime.of(
                         getRandomInt(2000, 2023),
                         getRandomInt(1, 13),
                         getRandomInt(1, 29),
@@ -32,10 +32,10 @@ public class MockAccountingRecord {
                         getRandomInt(0, 60),
                         getRandomInt(0, 60)
                         ),
-                    i % 2 == 0 ? ConceptType.PROPERTY : ConceptType.BONUSES ,
+                    i % 2 == 0 ? ConceptType.CURRENT_MONEY : ConceptType.BILL_TO_RECEIVE ,
                     new BigDecimal(getRandomDouble(100, 3000)).setScale(2, RoundingMode.HALF_DOWN)));
         }
 
-        return transactions;
+        return accountRecords;
     }
 }

@@ -5,15 +5,19 @@ import enums.ConceptType;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class Transaction {
+public class AccountRecord {
     private LocalDateTime data;
     private ConceptType conceptType;
     private BigDecimal amount;
 
-    public Transaction(LocalDateTime data, ConceptType conceptType, BigDecimal amount) {
+    public AccountRecord(LocalDateTime data, ConceptType conceptType, BigDecimal amount) {
         this.data = data;
         this.conceptType = conceptType;
         this.amount = amount;
+    }
+
+    public AccountRecord() {
+
     }
 
     public LocalDateTime getData() {
