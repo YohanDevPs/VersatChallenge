@@ -2,9 +2,8 @@ package service;
 
 import entities.AccountRecord;
 import entities.TotalBalance;
-import enums.AssetType;
 
-import java.util.*;
+import java.util.List;
 
 public class TotalBalanceService {
 

@@ -1,7 +1,7 @@
 package mocks;
 
-import enums.ConceptType;
 import entities.AccountRecord;
+import enums.ConceptType;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
