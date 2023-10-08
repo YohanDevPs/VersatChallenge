@@ -2,6 +2,7 @@ package processing;
 
 import entities.AccountRecord;
 import entities.BalanceSheet;
+import entities.StatementIncome;
 import enums.AssetType;
 
 import java.math.BigDecimal;
@@ -25,6 +26,15 @@ public class FinancialDataProcessor {
 
     public BalanceSheet getBalanceSheet() {
         return new BalanceSheet(getConvertedMapAccountRecords());
+    }
+
+    public StatementIncome getStatementIncome() {
+        var mapAccountRecord = getConvertedMapAccountRecords();
+
+        return new StatementIncome(
+                calculateTotalActivesAmount(mapAccountRecord),
+                calculateTotalPassivesAmount(mapAccountRecord)
+        );
     }
 
     private Set<AccountRecord> getFilteredAccountRecords() {

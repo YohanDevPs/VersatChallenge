@@ -32,7 +32,7 @@ public class MockAccountingRecord {
                         getRandomInt(0, 60),
                         getRandomInt(0, 60)
                         ),
-                    i % 2 == 0 ? ConceptType.CURRENT_MONEY : ConceptType.PROPERTY ,
+                    i % 2 == 0 ? ConceptType.BILL_TO_PAY : ConceptType.PROPERTY ,
                     new BigDecimal(getRandomDouble(100, 3000)).setScale(2, RoundingMode.HALF_DOWN)));
         }
 

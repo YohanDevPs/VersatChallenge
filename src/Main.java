@@ -16,5 +16,6 @@ public class Main {
 
         var recordsProcessed  = new FinancialDataProcessor(records, LocalDate.of(2020, 10, 8), LocalDate.of(2023, 10, 8));
         System.out.println(recordsProcessed.getBalanceSheet());
+        System.out.println(recordsProcessed.getStatementIncome());
     }
 }

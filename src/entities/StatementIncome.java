@@ -6,22 +6,40 @@ import java.util.Date;
 public class StatementIncome {
     private BigDecimal totalIncome;
     private BigDecimal totalExpenses;
-    private BigDecimal netProfit;
 
-    public StatementIncome(BigDecimal totalIncome, BigDecimal totalExpenses, BigDecimal netProfit) {
+    public StatementIncome(BigDecimal totalIncome, BigDecimal totalExpenses) {
         this.totalIncome = totalIncome;
         this.totalExpenses = totalExpenses;
-        this.netProfit = netProfit;
+    }
+
+    public BigDecimal getTotalIncome() {
+        return totalIncome;
+    }
+
+    public void setTotalIncome(BigDecimal totalIncome) {
+        this.totalIncome = totalIncome;
+    }
+
+    public BigDecimal getTotalExpenses() {
+        return totalExpenses;
+    }
+
+    public void setTotalExpenses(BigDecimal totalExpenses) {
+        this.totalExpenses = totalExpenses;
+    }
+
+    public BigDecimal getNetProfit() {
+        return this.totalIncome.subtract(this.totalExpenses);
     }
 
     @Override
     public String toString() {
-        return String.format("\n\nESTATO DE RESULTADO" +
+        return String.format("\n\n----- ESTATO DE RESULTADO -----" +
                         "\nIngressos totales: $ %.2f" +
                         "\nGastos totales: $ %.2f" +
                         "\nBeneficio neto: $ %.2f",
-                totalIncome,
-                totalExpenses,
-                netProfit);
+                getTotalIncome(),
+                getTotalExpenses(),
+                getNetProfit());
     }
 }
