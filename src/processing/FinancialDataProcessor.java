@@ -1,8 +1,11 @@
 package processing;
 
 import entities.AccountRecord;
-import processing.analisys.*;
 import enums.AssetType;
+import processing.analisys.BalanceSheet;
+import processing.analisys.LiquidAssets;
+import processing.analisys.Profitability;
+import processing.analisys.StatementIncome;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
