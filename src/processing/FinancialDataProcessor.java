@@ -2,6 +2,7 @@ package processing;
 
 import entities.AccountRecord;
 import entities.BalanceSheet;
+import entities.LiquidAssets;
 import entities.StatementIncome;
 import enums.AssetType;
 
@@ -26,6 +27,15 @@ public class FinancialDataProcessor {
 
     public BalanceSheet getBalanceSheet() {
         return new BalanceSheet(getConvertedMapAccountRecords());
+    }
+
+    public LiquidAssets getLiquidAssets() {
+        var mapRecords =  getConvertedMapAccountRecords();
+
+        return new LiquidAssets(calculateAmountByAssetType(
+                mapRecords, AssetType.ACTIVE_CURRENT),
+                calculateAmountByAssetType(mapRecords, AssetType.PASSIVE_CURRENT)
+        );
     }
 
     public StatementIncome getStatementIncome() {
