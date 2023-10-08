@@ -4,7 +4,6 @@ import enums.ConceptType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class AccountRecord {
     private LocalDate data;

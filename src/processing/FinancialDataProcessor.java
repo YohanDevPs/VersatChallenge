@@ -1,6 +1,7 @@
 package processing;
 
-import entities.*;
+import entities.AccountRecord;
+import processing.analisys.*;
 import enums.AssetType;
 
 import java.math.BigDecimal;
@@ -14,7 +15,7 @@ public class FinancialDataProcessor {
 
     private Set<AccountRecord> accountRecords;
     private LocalDate startDate;
-    private LocalDate endDate;
+    private final LocalDate endDate;
 
     public FinancialDataProcessor(Set<AccountRecord> accountRecords, LocalDate startDate, LocalDate endDate) {
         this.accountRecords = accountRecords;

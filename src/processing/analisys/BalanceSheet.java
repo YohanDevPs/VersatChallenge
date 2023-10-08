@@ -1,12 +1,11 @@
-package entities;
+package processing.analisys;
 
+import entities.AccountRecord;
 import enums.AssetType;
 import enums.ConceptType;
 import processing.FinancialDataProcessor;
-import utils.NumberFormater;
 
 import java.math.BigDecimal;
-import java.text.NumberFormat;
 import java.util.*;
 
 import static utils.NumberFormater.getNumberFormater;

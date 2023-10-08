@@ -1,4 +1,4 @@
-package entities;
+package processing.analisys;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -26,13 +26,5 @@ public class LiquidAssets {
         } else {
             return currentAssets.divide(currentLiabilities, 2, RoundingMode.HALF_DOWN);
         }
-    }
-
-    public BigDecimal getCurrentAssets() {
-        return currentAssets;
-    }
-
-    public BigDecimal getCurrentLiabilities() {
-        return currentLiabilities;
     }
 }

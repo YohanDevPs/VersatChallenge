@@ -5,37 +5,43 @@ import enums.ConceptType;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Random;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class MockAccountingRecord {
 
-    private static int getRandomInt(int min, int max) {
-        return new Random().nextInt(max - min) + min;
-    }
-    private static double getRandomDouble(int min, int max) {
-        return new Random().nextDouble(max - min);
-    }
-
-    public static Set<AccountRecord> accountRecordList() {
+    public static Set<AccountRecord> generateAccountRecords() {
         Set<AccountRecord> accountRecords = new HashSet<>();
 
-        for (int i = 0; i < 5; i++) {
-            accountRecords.add(
-                    new AccountRecord(LocalDateTime.of(
-                        getRandomInt(2022, 2023),
-                        getRandomInt(1, 13),
-                        getRandomInt(1, 29),
-                        getRandomInt(0, 24),
-                        getRandomInt(0, 60),
-                        getRandomInt(0, 60)
-                        ),
-                    i % 2 == 0 ? ConceptType.CURRENT_MONEY : ConceptType.TAX ,
-                    new BigDecimal(getRandomDouble(100, 3000)).setScale(2, RoundingMode.HALF_DOWN)));
+        for (int i = 0; i < 100000; i++) {
+            AccountRecord record = new AccountRecord();
+            record.setData(generateRandomDate());
+            record.setConceptType(generateRandomConceptType());
+            record.setAmount(generateRandomAmount());
+            accountRecords.add(record);
         }
 
         return accountRecords;
+    }
+
+    private static LocalDate generateRandomDate() {
+        long startEpochDay = LocalDate.of(2020, 1, 1).toEpochDay();
+        long endEpochDay = LocalDate.of(2023, 12, 31).toEpochDay();
+        long randomDay = ThreadLocalRandom.current().nextLong(startEpochDay, endEpochDay);
+        return LocalDate.ofEpochDay(randomDay);
+    }
+
+    private static ConceptType generateRandomConceptType() {
+        ConceptType[] values = ConceptType.values();
+        int randomIndex = ThreadLocalRandom.current().nextInt(values.length);
+        return values[randomIndex];
+    }
+
+    private static BigDecimal generateRandomAmount() {
+        return BigDecimal
+                .valueOf(ThreadLocalRandom.current().nextDouble(1, 1000))
+                .setScale(2, RoundingMode.HALF_DOWN);
     }
 }

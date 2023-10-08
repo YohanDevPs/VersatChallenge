@@ -1,14 +1,11 @@
-package entities;
+package processing.analisys;
 
 import java.math.BigDecimal;
 
 public class Profitability {
 
-    //  ganancia neta
-    private BigDecimal netIncome;
-
-    // ingressos totales
-    private BigDecimal totalIncome;
+    private final BigDecimal netIncome;
+    private final BigDecimal totalIncome;
 
     public Profitability(BigDecimal netIncome, BigDecimal totalIncome) {
         this.netIncome = netIncome;
@@ -16,27 +13,11 @@ public class Profitability {
     }
 
     public BigDecimal calculateNetProfitMargin() {
-        if (totalIncome.compareTo(BigDecimal.ZERO) == 0) {
+        if (this.totalIncome.compareTo(BigDecimal.ZERO) == 0) {
             return BigDecimal.ZERO;
         } else {
-            return netIncome.divide(totalIncome, 2, BigDecimal.ROUND_HALF_UP).multiply(BigDecimal.valueOf(100));
+            return this.netIncome.divide(this.totalIncome, 2, BigDecimal.ROUND_HALF_UP).multiply(BigDecimal.valueOf(100));
         }
-    }
-
-    public BigDecimal getNetIncome() {
-        return netIncome;
-    }
-
-    public void setNetIncome(BigDecimal netIncome) {
-        this.netIncome = netIncome;
-    }
-
-    public BigDecimal getTotalIncome() {
-        return totalIncome;
-    }
-
-    public void setTotalIncome(BigDecimal totalIncome) {
-        this.totalIncome = totalIncome;
     }
 
     public void showProfitability() {

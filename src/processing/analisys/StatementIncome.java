@@ -1,6 +1,4 @@
-package entities;
-
-import utils.NumberFormater;
+package processing.analisys;
 
 import java.math.BigDecimal;
 
@@ -15,14 +13,6 @@ public class StatementIncome {
         this.totalExpenses = totalExpenses;
     }
 
-    public BigDecimal getTotalIncome() {
-        return totalIncome;
-    }
-
-    public BigDecimal getTotalExpenses() {
-        return totalExpenses;
-    }
-
     public BigDecimal getNetProfit() {
         return this.totalIncome.subtract(this.totalExpenses);
     }
@@ -32,8 +22,8 @@ public class StatementIncome {
                         "\nIngressos totales: $ %s" +
                         "\nGastos totales: $ %s" +
                         "\nBeneficio neto: $ %s%n",
-                getNumberFormater().format(getTotalIncome()),
-                getNumberFormater().format(getTotalExpenses()),
+                getNumberFormater().format(this.totalIncome),
+                getNumberFormater().format(this.totalExpenses),
                 getNumberFormater().format(getNetProfit()));
     }
 }
