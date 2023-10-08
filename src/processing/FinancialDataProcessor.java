@@ -1,20 +1,17 @@
 package processing;
 
-import entities.*;
+import entities.AccountRecord;
+import entities.BalanceSheet;
 import enums.AssetType;
-import enums.ConceptType;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class FinancialDataProcessor {
 
-    private Set<AccountRecord> accountRecords = new HashSet<>();
+    private Set<AccountRecord> accountRecords;
     private LocalDate startDate;
     private LocalDate endDate;
 
@@ -43,5 +40,4 @@ public class FinancialDataProcessor {
     public BalanceSheet getBalanceSheet() {
         return new BalanceSheet(getConvertedMapAccountRecords());
     }
-
 }
