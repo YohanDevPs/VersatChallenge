@@ -1,6 +1,10 @@
 package entities;
 
+import utils.NumberFormater;
+
 import java.math.BigDecimal;
+
+import static utils.NumberFormater.getNumberFormater;
 
 public class StatementIncome {
     private final BigDecimal totalIncome;
@@ -23,14 +27,13 @@ public class StatementIncome {
         return this.totalIncome.subtract(this.totalExpenses);
     }
 
-    @Override
-    public String toString() {
-        return String.format("\n\n----- ESTATO DE RESULTADO -----" +
-                        "\nIngressos totales: $ %.2f" +
-                        "\nGastos totales: $ %.2f" +
-                        "\nBeneficio neto: $ %.2f",
-                getTotalIncome(),
-                getTotalExpenses(),
-                getNetProfit());
+    public void showStatementIncome() {
+        System.out.printf("\n----- ESTATO DE RESULTADO -----" +
+                        "\nIngressos totales: $ %s" +
+                        "\nGastos totales: $ %s" +
+                        "\nBeneficio neto: $ %s%n",
+                getNumberFormater().format(getTotalIncome()),
+                getNumberFormater().format(getTotalExpenses()),
+                getNumberFormater().format(getNetProfit()));
     }
 }

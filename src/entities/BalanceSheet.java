@@ -3,9 +3,13 @@ package entities;
 import enums.AssetType;
 import enums.ConceptType;
 import processing.FinancialDataProcessor;
+import utils.NumberFormater;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.util.*;
+
+import static utils.NumberFormater.getNumberFormater;
 
 public class BalanceSheet {
 
@@ -33,17 +37,17 @@ public class BalanceSheet {
         return recordMap.getOrDefault(assetType, new HashSet<>());
     }
 
-    @Override
-    public String toString() {
+    public void showBalanceSheet() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("---- BALANCE GENERAL ---- \n");
         appendCategoryDetails(stringBuilder, AssetType.ACTIVE_CURRENT);
         appendCategoryDetails(stringBuilder, AssetType.FIXED_ACTIVE);
-        stringBuilder.append(String.format("----- TOTAL ACTIVOS: %.2f -----%n%n", getTotalActivesAmount()));
+        stringBuilder.append(String.format("TOTAL ACTIVOS: $ %s%n%n", getNumberFormater().format(getTotalActivesAmount())));
         appendCategoryDetails(stringBuilder, AssetType.PASSIVE_CURRENT);
         appendCategoryDetails(stringBuilder, AssetType.PASSIVE_LONG_TERM);
-        stringBuilder.append(String.format("----- TOTAL PASSIVO: %.2f -----%n", getTotalPassivesAmount()));
-        return stringBuilder.toString();
+        stringBuilder.append(String.format("TOTAL PASSIVO: $ %s%n", getNumberFormater().format(getTotalPassivesAmount())));
+
+        System.out.println(stringBuilder);
     }
 
     private void appendCategoryDetails(StringBuilder stringBuilder, AssetType assetType) {
@@ -52,14 +56,15 @@ public class BalanceSheet {
         for (AccountRecord record : getSetByAssetType(assetType)) {
             ConceptType conceptType = record.getConceptType();
             if (processedConceptTypes.add(conceptType)) {
-                BigDecimal totalAmount = getTotalAmountForConceptType(conceptType);
                 stringBuilder.append(conceptType.getDescription())
-                        .append(": ")
-                        .append(totalAmount)
+                        .append(": $ ")
+                        .append(getNumberFormater()
+                                .format(getTotalAmountForConceptType(conceptType))
+                        )
                         .append("\n");
             }
         }
-        stringBuilder.append(String.format("Total %s: %.2f%n%n", assetType.getDescription(), getAmountByAssetType(assetType)));
+        stringBuilder.append(String.format("Total %s: $ %s %n%n", assetType.getDescription(), getNumberFormater().format(getAmountByAssetType(assetType))));
         processedConceptTypes.clear();
     }
 

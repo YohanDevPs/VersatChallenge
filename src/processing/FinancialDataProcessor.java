@@ -58,8 +58,8 @@ public class FinancialDataProcessor {
     private Set<AccountRecord> getFilteredAccountRecords() {
         return accountRecords.stream()
                 .filter(record ->
-                        !record.getData().toLocalDate().isBefore(this.startDate) &&
-                                !record.getData().toLocalDate().isAfter(this.endDate))
+                        !record.getData().isBefore(this.startDate) &&
+                                !record.getData().isAfter(this.endDate))
                 .collect(Collectors.toSet());
     }
 

@@ -1,4 +1,5 @@
 import entities.AccountRecord;
+import loaders.AccountRecordsLoader;
 import mocks.MockAccountingRecord;
 import processing.FinancialDataProcessor;
 
@@ -7,17 +8,13 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
 
-        var records = MockAccountingRecord.accountRecordList();
+        var records = MockAccountingRecord.generateAccountRecords();
 
-        for (AccountRecord accountRecord : records) {
-            System.out.println(accountRecord);
-        }
-        System.out.println("---------------------------------------------------------------------------");
+        var financialProcessor  = new FinancialDataProcessor(records, LocalDate.of(2022, 10, 8), LocalDate.of(2023, 10, 8));
 
-        var recordsProcessed  = new FinancialDataProcessor(records, LocalDate.of(2020, 10, 8), LocalDate.of(2023, 10, 8));
-        System.out.println(recordsProcessed.getBalanceSheet());
-        System.out.println(recordsProcessed.getStatementIncome());
-        System.out.println(recordsProcessed.getLiquidAssets());
-        recordsProcessed.getProfitability().showProfitability();
+        financialProcessor.getBalanceSheet().showBalanceSheet();
+        financialProcessor.getStatementIncome().showStatementIncome();
+        financialProcessor.getLiquidAssets().showLiquidAssets();
+        financialProcessor.getProfitability().showProfitability();
     }
 }

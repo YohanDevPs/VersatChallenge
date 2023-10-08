@@ -3,14 +3,15 @@ package entities;
 import enums.ConceptType;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class AccountRecord {
-    private LocalDateTime data;
+    private LocalDate data;
     private ConceptType conceptType;
     private BigDecimal amount;
 
-    public AccountRecord(LocalDateTime data, ConceptType conceptType, BigDecimal amount) {
+    public AccountRecord(LocalDate data, ConceptType conceptType, BigDecimal amount) {
         this.data = data;
         this.conceptType = conceptType;
         this.amount = amount;
@@ -20,11 +21,11 @@ public class AccountRecord {
 
     }
 
-    public LocalDateTime getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(LocalDateTime data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 

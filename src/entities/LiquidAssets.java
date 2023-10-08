@@ -12,13 +12,12 @@ public class LiquidAssets {
         this.currentLiabilities = currentLiabilities;
     }
 
-    @Override
-    public String toString() {
+    public void showLiquidAssets() {
         var currentRatio = getCurrentRatio(currentAssets, currentLiabilities);
 
-        return String.format("%n%n---- ANÁLISE DE LIQUIDEZ ----%n" +
+        System.out.println(String.format("%n%n---- ANÁLISE DE LIQUIDEZ ----%n" +
                         "Liquidez Corrente: %.2f o %d%%",
-                currentRatio, currentRatio.multiply(BigDecimal.valueOf(100)).intValue());
+                currentRatio, currentRatio.multiply(BigDecimal.valueOf(100)).intValue()));
     }
 
     public BigDecimal getCurrentRatio(BigDecimal currentAssets, BigDecimal currentLiabilities) {
