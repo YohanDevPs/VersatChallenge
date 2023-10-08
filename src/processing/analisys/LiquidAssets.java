@@ -12,7 +12,7 @@ public class LiquidAssets {
         this.currentLiabilities = currentLiabilities;
     }
 
-    public void showLiquidAssets() {
+    public void printLiquidAssets() {
         var currentRatio = getCurrentRatio(currentAssets, currentLiabilities);
 
         System.out.println(String.format("%n%n---- ANÁLISE DE LIQUIDEZ ----%n" +

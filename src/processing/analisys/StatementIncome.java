@@ -17,7 +17,7 @@ public class StatementIncome {
         return this.totalIncome.subtract(this.totalExpenses);
     }
 
-    public void showStatementIncome() {
+    public void printStatementIncome() {
         System.out.printf("\n----- ESTATO DE RESULTADO -----" +
                         "\nIngressos totales: $ %s" +
                         "\nGastos totales: $ %s" +

@@ -10,9 +10,9 @@ public class Main {
 
         var financialProcessor  = new FinancialDataProcessor(records, LocalDate.of(2022, 10, 8), LocalDate.of(2023, 10, 8));
 
-        financialProcessor.getBalanceSheet().showBalanceSheet();
-        financialProcessor.getStatementIncome().showStatementIncome();
-        financialProcessor.getLiquidAssets().showLiquidAssets();
-        financialProcessor.getProfitability().showProfitability();
+        financialProcessor.getBalanceSheet().printBalanceSheet();
+        financialProcessor.getStatementIncome().printStatementIncome();
+        financialProcessor.getLiquidAssets().printLiquidAssets();
+        financialProcessor.getProfitability().printProfitability();
     }
 }

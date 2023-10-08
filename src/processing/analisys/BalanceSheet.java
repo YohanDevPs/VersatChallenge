@@ -36,7 +36,7 @@ public class BalanceSheet {
         return recordMap.getOrDefault(assetType, new HashSet<>());
     }
 
-    public void showBalanceSheet() {
+    public void printBalanceSheet() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("---- BALANCE GENERAL ---- \n");
         appendCategoryDetails(stringBuilder, AssetType.ACTIVE_CURRENT);

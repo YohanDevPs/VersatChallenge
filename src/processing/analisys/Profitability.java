@@ -20,7 +20,7 @@ public class Profitability {
         }
     }
 
-    public void showProfitability() {
+    public void printProfitability() {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append("\n\n---- ANÁLISIS DE RENTABILIDAD ----\n");
