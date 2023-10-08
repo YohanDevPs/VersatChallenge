@@ -4,7 +4,9 @@ import entities.AccountRecord;
 import entities.BalanceSheet;
 import enums.AssetType;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,6 +21,10 @@ public class FinancialDataProcessor {
         this.accountRecords = accountRecords;
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+
+    public BalanceSheet getBalanceSheet() {
+        return new BalanceSheet(getConvertedMapAccountRecords());
     }
 
     private Set<AccountRecord> getFilteredAccountRecords() {
@@ -37,7 +43,23 @@ public class FinancialDataProcessor {
                 ));
     }
 
-    public BalanceSheet getBalanceSheet() {
-        return new BalanceSheet(getConvertedMapAccountRecords());
+    public static BigDecimal calculateTotalActivesAmount(Map<AssetType, Set<AccountRecord>> recordMap) {
+        return calculateAmountByAssetType(recordMap, AssetType.ACTIVE_CURRENT)
+                .add(calculateAmountByAssetType(recordMap, AssetType.FIXED_ACTIVE));
+    }
+
+    public static BigDecimal calculateTotalPassivesAmount(Map<AssetType, Set<AccountRecord>> recordMap) {
+        return calculateAmountByAssetType(recordMap, AssetType.PASSIVE_CURRENT)
+                .add(calculateAmountByAssetType(recordMap, AssetType.PASSIVE_LONG_TERM));
+    }
+
+    public static BigDecimal calculateAmountByAssetType(Map<AssetType, Set<AccountRecord>> recordMap, AssetType assetType) {
+        return getSetByAssetType(recordMap, assetType).stream()
+                .map(AccountRecord::getAmount)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    public static Set<AccountRecord> getSetByAssetType(Map<AssetType, Set<AccountRecord>> recordMap, AssetType assetType) {
+        return recordMap.getOrDefault(assetType, new HashSet<>());
     }
 }

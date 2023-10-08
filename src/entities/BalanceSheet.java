@@ -2,6 +2,7 @@ package entities;
 
 import enums.AssetType;
 import enums.ConceptType;
+import processing.FinancialDataProcessor;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -17,13 +18,11 @@ public class BalanceSheet {
     }
 
     public BigDecimal getTotalActivesAmount() {
-        return getAmountByAssetType(AssetType.ACTIVE_CURRENT)
-                .add(getAmountByAssetType(AssetType.FIXED_ACTIVE));
+        return FinancialDataProcessor.calculateTotalActivesAmount(recordMap);
     }
 
     public BigDecimal getTotalPassivesAmount() {
-        return getAmountByAssetType(AssetType.PASSIVE_CURRENT)
-                .add(getAmountByAssetType(AssetType.PASSIVE_LONG_TERM));
+        return FinancialDataProcessor.calculateTotalPassivesAmount(recordMap);
     }
 
     public BigDecimal getAmountByAssetType(AssetType assetType) {
