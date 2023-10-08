@@ -1,33 +1,35 @@
 package enums;
 
 public enum ConceptType {
+    CURRENT_MONEY(AssetType.ACTIVE_CURRENT, "Current Money"),
+    BILL_TO_RECEIVE(AssetType.ACTIVE_CURRENT, "Bill to Receive"),
+    EFECTIVO(AssetType.ACTIVE_CURRENT, "Efectivo"),
 
+    PROPERTY(AssetType.FIXED_ACTIVE, "Property"),
+    TEAM(AssetType.FIXED_ACTIVE, "Team"),
+    DEFERRED_ASSETS(AssetType.FIXED_ACTIVE, "Deferred Assets"),
 
-    CURRENT_MONEY(AssetType.ACTIVE_CURRENT),
-    BILL_TO_RECEIVE(AssetType.ACTIVE_CURRENT),
-    EFECTIVO(AssetType.ACTIVE_CURRENT),
+    TAX(AssetType.PASSIVE_CURRENT, "Tax"),
+    BILL_TO_PAY(AssetType.PASSIVE_CURRENT, "Bill to Pay"),
+    RESERVE_PROVISION(AssetType.PASSIVE_CURRENT, "Reserve Provision"),
 
-    PROPERTY(AssetType.FIXED_ACTIVE),
-    TEAM(AssetType.FIXED_ACTIVE),
-    DEFERRED_ASSETS(AssetType.FIXED_ACTIVE),
+    BONUSES(AssetType.PASSIVE_LONG_TERM, "Bonuses"),
+    FINANCE_LEASES(AssetType.PASSIVE_LONG_TERM, "Finance Leases"),
+    LONG_TERM_LOAN(AssetType.PASSIVE_LONG_TERM, "Long Term Loan");
 
+    private final AssetType parentType;
+    private final String description;
 
-    TAX(AssetType.PASSIVE_CURRENT),
-    BILL_TO_PAY(AssetType.PASSIVE_CURRENT),
-    RESERVE_PROVISION(AssetType.PASSIVE_CURRENT),
-
-
-    BONUSES(AssetType.PASSIVE_LONG_TERM),
-    FINANCE_LEASES(AssetType.PASSIVE_LONG_TERM),
-    LONG_TERM_LOAN(AssetType.PASSIVE_LONG_TERM);
-
-    private AssetType parentType;
-
-    ConceptType(AssetType parentType) {
+    ConceptType(AssetType parentType, String description) {
         this.parentType = parentType;
+        this.description = description;
     }
 
     public AssetType getParentType() {
         return parentType;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }
