@@ -9,9 +9,7 @@ import java.util.*;
 
 public class BalanceSheet {
 
-    private Map<AssetType, Set<AccountRecord>> recordMap;
-    private BigDecimal totalActives;
-    private BigDecimal totalPassives;
+    private final Map<AssetType, Set<AccountRecord>> recordMap;
 
     public BalanceSheet(Map<AssetType, Set<AccountRecord>> recordMap) {
         this.recordMap = Optional.ofNullable(recordMap).orElse(Collections.emptyMap());

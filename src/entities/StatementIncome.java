@@ -1,11 +1,10 @@
 package entities;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 public class StatementIncome {
-    private BigDecimal totalIncome;
-    private BigDecimal totalExpenses;
+    private final BigDecimal totalIncome;
+    private final BigDecimal totalExpenses;
 
     public StatementIncome(BigDecimal totalIncome, BigDecimal totalExpenses) {
         this.totalIncome = totalIncome;
@@ -16,16 +15,8 @@ public class StatementIncome {
         return totalIncome;
     }
 
-    public void setTotalIncome(BigDecimal totalIncome) {
-        this.totalIncome = totalIncome;
-    }
-
     public BigDecimal getTotalExpenses() {
         return totalExpenses;
-    }
-
-    public void setTotalExpenses(BigDecimal totalExpenses) {
-        this.totalExpenses = totalExpenses;
     }
 
     public BigDecimal getNetProfit() {

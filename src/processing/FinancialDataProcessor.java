@@ -1,9 +1,6 @@
 package processing;
 
-import entities.AccountRecord;
-import entities.BalanceSheet;
-import entities.LiquidAssets;
-import entities.StatementIncome;
+import entities.*;
 import enums.AssetType;
 
 import java.math.BigDecimal;
@@ -23,6 +20,17 @@ public class FinancialDataProcessor {
         this.accountRecords = accountRecords;
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+
+    public Profitability getProfitability() {
+        var mapAccountRecords = getConvertedMapAccountRecords();
+
+        BigDecimal totalIncome = calculateTotalActivesAmount(mapAccountRecords);
+
+        return new Profitability(
+                totalIncome.subtract(calculateTotalPassivesAmount(mapAccountRecords)),
+                totalIncome
+        );
     }
 
     public BalanceSheet getBalanceSheet() {

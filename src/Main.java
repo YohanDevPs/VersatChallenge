@@ -18,5 +18,6 @@ public class Main {
         System.out.println(recordsProcessed.getBalanceSheet());
         System.out.println(recordsProcessed.getStatementIncome());
         System.out.println(recordsProcessed.getLiquidAssets());
+        recordsProcessed.getProfitability().showProfitability();
     }
 }

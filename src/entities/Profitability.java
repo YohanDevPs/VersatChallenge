@@ -10,19 +10,16 @@ public class Profitability {
     // ingressos totales
     private BigDecimal totalIncome;
 
-
-    public Profitability() {
+    public Profitability(BigDecimal netIncome, BigDecimal totalIncome) {
         this.netIncome = netIncome;
         this.totalIncome = totalIncome;
     }
 
-    public BigDecimal getNetProfitMargin() {
-        if (netIncome.compareTo(BigDecimal.ZERO) != 0) {
-            return netIncome.divide(totalIncome, 2, BigDecimal.ROUND_HALF_UP)
-                    .multiply(BigDecimal.valueOf(100));
-        } else {
-            System.out.println("Los ingresos totales son cero. No se puede calcular el margen de beneficio neto.");
+    public BigDecimal calculateNetProfitMargin() {
+        if (totalIncome.compareTo(BigDecimal.ZERO) == 0) {
             return BigDecimal.ZERO;
+        } else {
+            return netIncome.divide(totalIncome, 2, BigDecimal.ROUND_HALF_UP).multiply(BigDecimal.valueOf(100));
         }
     }
 
@@ -42,10 +39,12 @@ public class Profitability {
         this.totalIncome = totalIncome;
     }
 
-    @Override
-    public String toString() {
-        return String.format("\n\nBENEFICIO NETO%n" +
-                "Margen de beneficio neto es: %.2f",
-                getNetProfitMargin());
+    public void showProfitability() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\n\n---- ANÁLISIS DE RENTABILIDAD ----\n");
+        stringBuilder.append("Margem de benefício neto: ").append(calculateNetProfitMargin()).append("%");
+
+        System.out.println(stringBuilder);
     }
 }
