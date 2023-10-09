@@ -8,7 +8,7 @@ import processing.FinancialDataProcessor;
 import java.math.BigDecimal;
 import java.util.*;
 
-import static utils.NumberFormater.getNumberFormater;
+import static utils.NumberFormatter.getNumberFormatter;
 
 public class BalanceSheet {
 
@@ -41,10 +41,10 @@ public class BalanceSheet {
         stringBuilder.append("---- BALANCE GENERAL ---- \n");
         appendCategoryDetails(stringBuilder, AssetType.ACTIVE_CURRENT);
         appendCategoryDetails(stringBuilder, AssetType.FIXED_ACTIVE);
-        stringBuilder.append(String.format("TOTAL ACTIVOS: $ %s%n%n", getNumberFormater().format(getTotalActivesAmount())));
+        stringBuilder.append(String.format("TOTAL ACTIVOS: $ %s%n%n", getNumberFormatter().format(getTotalActivesAmount())));
         appendCategoryDetails(stringBuilder, AssetType.PASSIVE_CURRENT);
         appendCategoryDetails(stringBuilder, AssetType.PASSIVE_LONG_TERM);
-        stringBuilder.append(String.format("TOTAL PASSIVO: $ %s%n", getNumberFormater().format(getTotalPassivesAmount())));
+        stringBuilder.append(String.format("TOTAL PASSIVO: $ %s%n", getNumberFormatter().format(getTotalPassivesAmount())));
 
         System.out.println(stringBuilder);
     }
@@ -57,13 +57,13 @@ public class BalanceSheet {
             if (processedConceptTypes.add(conceptType)) {
                 stringBuilder.append(conceptType.getDescription())
                         .append(": $ ")
-                        .append(getNumberFormater()
+                        .append(getNumberFormatter()
                                 .format(getTotalAmountForConceptType(conceptType))
                         )
                         .append("\n");
             }
         }
-        stringBuilder.append(String.format("Total %s: $ %s %n%n", assetType.getDescription(), getNumberFormater().format(getAmountByAssetType(assetType))));
+        stringBuilder.append(String.format("Total %s: $ %s %n%n", assetType.getDescription(), getNumberFormatter().format(getAmountByAssetType(assetType))));
         processedConceptTypes.clear();
     }
 

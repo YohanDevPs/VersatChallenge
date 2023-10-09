@@ -2,7 +2,7 @@ package processing.analisys;
 
 import java.math.BigDecimal;
 
-import static utils.NumberFormater.getNumberFormater;
+import static utils.NumberFormatter.getNumberFormatter;
 
 public class StatementIncome {
     private final BigDecimal totalIncome;
@@ -22,8 +22,8 @@ public class StatementIncome {
                         "\nIngressos totales: $ %s" +
                         "\nGastos totales: $ %s" +
                         "\nBeneficio neto: $ %s%n",
-                getNumberFormater().format(this.totalIncome),
-                getNumberFormater().format(this.totalExpenses),
-                getNumberFormater().format(getNetProfit()));
+                getNumberFormatter().format(this.totalIncome),
+                getNumberFormatter().format(this.totalExpenses),
+                getNumberFormatter().format(getNetProfit()));
     }
 }
