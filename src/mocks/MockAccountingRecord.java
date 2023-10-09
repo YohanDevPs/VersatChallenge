@@ -12,10 +12,10 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class MockAccountingRecord {
 
-    public static Set<AccountRecord> generateAccountRecords() {
+    public static Set<AccountRecord> generateAccountRecords(Long size) {
         Set<AccountRecord> accountRecords = new HashSet<>();
 
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < size; i++) {
             AccountRecord record = new AccountRecord();
             record.setData(generateRandomDate());
             record.setConceptType(generateRandomConceptType());
