@@ -1,32 +1,32 @@
-## Configuração do Ambiente
+## Configuración del Entorno
 
-### Pré-requisitos
-- Java Development Kit (JDK) 17:
-- IDE
+### Requisitos Previos
+- Kit de Desarrollo Java (JDK) 17:
+- Entorno de Desarrollo Integrado (IDE)
   
-1. Certifique-se de ter o JDK 17 instalado no seu sistema. Caso não possua o JDK 17 configurado na máquina, siga esses videos tutoriais para [instalar no Windows](https://www.youtube.com/watch?v=QekeJBShCy4) e [aqui para Linux](https://www.youtube.com/watch?v=iHZ4b1twvlg).
-2. Baixe o projeto ou clone via git (git clone git@github.com:YohanDevPs/VersatChallenge.git).
-3. Importe para sua IDE e atualize o projeto.
+1. Asegúrate de tener instalado el JDK 17 en tu sistema. Si no tienes el JDK 17 configurado en tu máquina, sigue estos tutoriales en video para [instalar en Windows](https://www.youtube.com/watch?v=QekeJBShCy4) e [aqui para Linux](https://www.youtube.com/watch?v=iHZ4b1twvlg).
+2. Descarga el proyecto o clónalo a través de Git (git clone git@github.com:YohanDevPs/VersatChallenge.git).
+3. Importa el proyecto en tu IDE y actualiza el proyecto.
 
-### O que o projeto faz:
+### Descripción del Proyecto:
 
-**Datos de Entrada:** La función o programa debe tomar como entrada una lista de registros contables. Cada registro contiene información sobre la fecha, el concepto y el monto de una transacción.
+- Datos de Entrada: La función o programa debe tomar como entrada una lista de registros contables. Cada registro contiene información sobre la fecha, el concepto y el monto de una transacción.
 
-**Salida Esperada:** A partir dos dados de entrada, o programa imprime informações sobre balance general, estado de resultados, índice de liquidez corriente y margen de beneficio neto.
+- Resultado Esperado: A partir de los datos de entrada, el programa imprime información sobre el balance general, el estado de resultados, el índice de liquidez corriente y el margen de beneficio neto.
 
-**OBS**: Criei uma classe chamada `MockAccountingRecord.java`, cujo implementei um algoritmo para fornecer uma lista de dados validos para testarmos a aplicação. 
+**NOTA:** Creé una clase llamada `MockAccountingRecord.java`, en la cual implementé un algoritmo para proporcionar una lista de datos válidos para probar la aplicación.
 
 <details>
-  <summary>Caso queira manipular o tamanho da lista modifique o tamanho desejado aqui:</summary>
+  <summary>Si deseas modificar el tamaño de la lista, hazlo aquí:</summary>
 
   ![print](https://github.com/YohanDevPs/VersatChallenge/assets/87953006/3e453b91-e605-4df4-af66-e6614b8dda9a)
 
 </details>
 
-### Executando o projeto e retorno no console:
+### Ejecución del Proyecto y Resultados en la Consola:
 
 <details>
-  <summary>Exemplo de saída:</summary>
+  <summary>Ejemplo de salida:</summary>
   
 ```
  ---- BALANCE GENERAL ---- 
