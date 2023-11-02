@@ -1,27 +1,18 @@
-## Configuración del Entorno
+## Configuração do Ambiente
 
-### Requisitos Previos
-- Kit de Desarrollo Java (JDK) 17:
-- Entorno de Desarrollo Integrado (IDE)
+### Pré-requisitos
+- Kit de Desenvolvimento Java (JDK) 17:
+- Ambiente de Desenvolvimento Integrado (IDE)
   
-1. Asegúrate de tener instalado el JDK 17 en tu sistema. Si no tienes el JDK 17 configurado en tu máquina, sigue estos tutoriales en video para [instalar en Windows](https://www.youtube.com/watch?v=QekeJBShCy4) e [aqui para Linux](https://www.youtube.com/watch?v=iHZ4b1twvlg).
-2. Descarga el proyecto o clónalo a través de Git (git clone git@github.com:YohanDevPs/VersatChallenge.git).
-3. Importa el proyecto en tu IDE y actualiza el proyecto.
+1. Certifique-se de ter o JDK 17 instalado no seu sistema. Se o JDK 17 não estiver configurado na sua máquina, siga estes tutoriais em vídeo para [instalar no Windows](https://www.youtube.com/watch?v=QekeJBShCy4) e [aqui para Linux](https://www.youtube.com/watch?v=iHZ4b1twvlg).
+2. Faça o download do projeto ou clone-o via Git (git clone https://github.com/YohanDevPs/VersatChallenge.git).
+3. Importe o projeto na sua IDE e atualize o projeto.
 
-### Descripción del Proyecto:
+### Descrição do Projeto:
 
-- Datos de Entrada: La función o programa debe tomar como entrada una lista de registros contables. Cada registro contiene información sobre la fecha, el concepto y el monto de una transacción.
+- Dados de Entrada: A função ou programa deve receber como entrada uma lista de registros contábeis. Cada registro contém informações sobre a data, o tipo (ativo corrente, ativo fixo, passivo corrente e passivo a longo prazo) e o valor de uma transação.
 
-- Resultado Esperado: A partir de los datos de entrada, el programa imprime información sobre el balance general, el estado de resultados, el índice de liquidez corriente y el margen de beneficio neto.
-
-**NOTA:** Creé una clase llamada `MockAccountingRecord.java`, en la cual implementé un algoritmo para proporcionar una lista de datos válidos para probar la aplicación.
-
-<details>
-  <summary>Si deseas modificar el tamaño de la lista, hazlo aquí:</summary>
-
-  ![print](https://github.com/YohanDevPs/VersatChallenge/assets/87953006/3e453b91-e605-4df4-af66-e6614b8dda9a)
-
-</details>
+- Resultado Esperado: Com base nos dados de entrada, o programa imprime informações sobre o balanço geral, o estado de resultados, o índice de liquidez corrente e a margem de lucro líquido.
 
 ### Ejecución del Proyecto y Resultados en la Consola:
 
